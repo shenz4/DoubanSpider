@@ -12,3 +12,8 @@
 - 通过 xpath 动态查找下一页
 ### 数据
 ![数据](https://imgchr.com/i/PGIuAf)
+### 注意
+- 开发环境为windows，可能会有不可预测的状况出现
+- 调用windows cmdline API来启动爬虫，其他环境请自行调整
+- 每次运行会重复往csv文件中输入数据，建议自行删除douban.csv文件后再运行
+- 程序入口位于scrapyspider/spiders目录下main.py文件
