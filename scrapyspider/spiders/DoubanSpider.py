@@ -7,7 +7,7 @@ import io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')
 
 
-class JingDongSpider(Spider):
+class DoubanSpider(Spider):
     name = "douban_spider"
     allowed_domains = ['movie.douban.com']
     start_urls = ["https://movie.douban.com/top250/"]
@@ -17,7 +17,7 @@ class JingDongSpider(Spider):
 
     def parse(self, response):
         # 每调用这个函数,times + 1
-        times = self.times + 1
+        self.times += 1
 
         print(response.text)
         # 电影列表的xpath
@@ -69,7 +69,9 @@ class JingDongSpider(Spider):
             yield holder
 
         # 拼接url并跳转到下一页
-        if (next_page is not None) and (times <= 30):
+        if (next_page is not None) and (self.times <= 30):
             dest = self.start_urls[0] + next_page
             print(dest)
             yield Request(dest, callback=self.parse)
+        else:
+            print("本次共爬取了{}页信息".format(self.times))
